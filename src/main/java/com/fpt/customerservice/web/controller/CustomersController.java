@@ -2,6 +2,7 @@ package com.fpt.customerservice.web.controller;
 
 import com.fpt.customerservice.services.CustomersService;
 import com.fpt.customerservice.web.model.CustomersDto;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -21,7 +22,7 @@ public class CustomersController {
     }
 
     @PostMapping
-    public ResponseEntity<CustomersDto> create(@RequestBody CustomersDto customersDto) {
+    public ResponseEntity<CustomersDto> create(@Valid @RequestBody CustomersDto customersDto) {
         CustomersDto resultCustomerDto = customersService.createCustomers(customersDto);
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setLocation(UriComponentsBuilder.fromPath("/api/v1/customers/{id}")
